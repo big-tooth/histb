@@ -1,27 +1,10 @@
-#!/bin/bash
-# Only support Debian 10
+# samba
 
-if [ `whoami` != "root" ]; then
-    echo "sudo or root is required!"
-    exit 1
-fi
+cat << EOF | LC_ALL=C LANGUAGE=C LANG=C chroot ${ROOTFS}
+    apt install -y samba
+EOF
 
-if [ ! -f "/etc/debian_version" ]; then
-    echo "Boss, do you want to try debian?"
-    exit 1
-fi
-check_samba(){
-  type samba > /dev/null 2>&1
-  if [ $? -eq 0 ] ;then
-    echo "samba软件已存在，请不要重复安装"
-    exit 1
-  else
-    install_samba
-  fi
-}
-install_samba(){
-  apt update && apt install samba -y
-  cat <<EOT > /etc/samba/smb.conf
+cat <<EOT > ${ROOTFS}/etc/samba/smb.conf
 [global]
    workgroup = WORKGROUP
    server string = %h server (Samba, Ubuntu)
@@ -62,11 +45,7 @@ install_samba(){
 
 EOT
 
-  # limit log size
-  sed -ri -e '/^\s+size\s+.*/d' /etc/logrotate.d/samba
-  sed -ri -e 's/^(\s+)(rotate\s+).*/\1\21\n\1size 1M/g' /etc/logrotate.d/samba
-
-  systemctl restart smbd
-}
-check_samba
+# limit log size
+sed -ri -e '/^\s+size\s+.*/d' ${ROOTFS}/etc/logrotate.d/samba
+sed -ri -e 's/^(\s+)(rotate\s+).*/\1\21\n\1size 1M/g' ${ROOTFS}/etc/logrotate.d/samba
 

@@ -245,7 +245,6 @@
 					df -H							查看磁盘使用详情	
 					ls -al (ll)						查看当前目录下的所有文件	
 					apt update && apt upgrade -y	更新官方源已安装的软件	
-					apt install samba				安装软件包, 例如 Samba
 					cd /home/ubuntu					进入 /home/ubuntu 目录位置
 					wget http://xxx.com/xxx.xxx		下载网络链接文件到当前文件夹位置
 					passwd root						修改当前系统账号 root 的密码, 需要重复输入两次密码
@@ -255,7 +254,6 @@
                                 <p>盒子内置有以下几个基本功能的软件安装小白脚本, 直接输入以下命令即可自动安装并自动配置, 即装即用。部分脚本安装位置在 /opt/ 路径下，如有需要，请自行更改脚本。</p>
 
                                 <pre class="brush: html">
-		                    	install-samba.sh		安装局域网共享
 		                    	install-qinglong.sh		安装 Docker 应用: 青龙面板
 		                    	install-v2ray.sh		安装 Socks5 服务器
 		                    	install-portainer.sh	安装 Docker 容器管理面板
@@ -491,7 +489,7 @@
 
                         <div class="row">
                             <div class="col-md-12 left-align">
-                                <h2 class="dark-text">如何安装和设置网络文档共享<hr></h2>
+                                <h2 class="dark-text">如何设置网络文档共享<hr></h2>
                             </div>
                             <!-- end col -->
                         </div>
@@ -500,8 +498,7 @@
                         <div class="row">
 
                             <div class="col-md-12">
-                                <p>第一步, 先运行命令 install-samba.sh 使用系统内置的脚本安装 Samba 软件
-                                <br>安装完成后会自动共享 /home/ubuntu/downloads 文件夹, 
+                                <p>系统已经预先安装好 Samba 并自动共享 /home/ubuntu/downloads 文件夹, 
                                 <br>在文件管理器输入: \\<?php echo $lanip ?> 即可访问</p>
                             </div>
                             <h4>修改配置文档, 把U盘的文件夹共享出来 </h4>
