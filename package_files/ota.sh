@@ -37,12 +37,31 @@ dl_get() {
     _exit 1 "Download $file_url failed"
 }
 
-# typecho: add new theme
-printStr yellow "typecho: adding new theme"
-[ -d /var/www/html/blog/usr/themes/joe ] && rm -rf /var/www/html/blog/usr/themes/joe
-dl_get "update/soft_init/Joe.zip" /tmp
-unzip -qq /tmp/Joe.zip -d /var/www/html/blog/usr/themes
-printStr yellow "typecho: upgraded"
-printf $GREEN_LINE
+up_script() {
+    if [ ! -f /usr/bin/nasupdate ]; then
+	cat <<EOT > /usr/bin/nasupdate
+	#!/bin/bash
+	    
+	bash <(curl https://raw.hisi.ga/teasiu/histb/main/package_files/ota.sh)
+	EOT
+	chmod +x /usr/bin/nasupdate
+	printStr yellow "up_script: set"
+	printf $GREEN_LINE
+    fi
+}
+
+up_typecho_theme() {
+    if [ ! -d /var/www/html/blog/usr/themes/Joe ]; then
+	printStr yellow "typecho: adding new theme"
+	[ -d /var/www/html/blog/usr/themes/Joe ] && rm -rf /var/www/html/blog/usr/themes/Joe
+	dl_get "update/soft_init/Joe.zip" /tmp
+	unzip -qq /tmp/Joe.zip -d /var/www/html/blog/usr/themes
+	printStr yellow "typecho: upgraded"
+	printf $GREEN_LINE
+    fi
+}
+
+up_script
+up_typecho_theme
 
 _exit 0 "all upgraded successed"
