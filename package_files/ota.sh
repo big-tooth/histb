@@ -46,15 +46,15 @@ bash <(curl https://raw.hisi.ga/teasiu/histb/main/package_files/ota.sh)
 
 EOF
 	chmod +x /usr/bin/nasupdate
-	printStr yellow "up_script: set"
+	printStr yellow "up_script: had set"
 	printf $GREEN_LINE
     fi
 }
 
 up_typecho_theme() {
-    if [ ! -d /var/www/html/blog/usr/themes/Joe ]; then
+    if [ ! -d /var/www/html/blog/usr/themes/joe ]; then
 	printStr yellow "typecho: adding new theme"
-	[ -d /var/www/html/blog/usr/themes/Joe ] && rm -rf /var/www/html/blog/usr/themes/Joe
+	[ -d /var/www/html/blog/usr/themes/joe ] && rm -rf /var/www/html/blog/usr/themes/joe
 	dl_get "update/soft_init/Joe.zip" /tmp
 	unzip -qq /tmp/Joe.zip -d /var/www/html/blog/usr/themes
 	printStr yellow "typecho: upgraded"
