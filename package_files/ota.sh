@@ -39,11 +39,12 @@ dl_get() {
 
 up_script() {
     if [ ! -f /usr/bin/nasupdate ]; then
-	cat <<EOT > /usr/bin/nasupdate
-	#!/bin/bash
-	    
-	bash <(curl https://raw.hisi.ga/teasiu/histb/main/package_files/ota.sh)
-	EOT
+cat <<EOF > /usr/bin/nasupdate
+#!/bin/bash
+    
+bash <(curl https://raw.hisi.ga/teasiu/histb/main/package_files/ota.sh)
+
+EOF
 	chmod +x /usr/bin/nasupdate
 	printStr yellow "up_script: set"
 	printf $GREEN_LINE
