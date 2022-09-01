@@ -62,7 +62,22 @@ up_typecho_theme() {
     fi
 }
 
+up_ddns_ip() {
+    if [ ! -f /home/ubuntu/client-mode/checkupdate ]; then
+	printStr yellow "ddns script: update ip address"
+	wget https://raw.hisi.ga/teasiu/histb/main/package_files/others/pre_files/common/home/ubuntu/client-mode/ddns_oray.sh -O /home/ubuntu/client-mode/ddns_oray.sh
+	wget https://raw.hisi.ga/teasiu/histb/main/package_files/others/pre_files/common/home/ubuntu/client-mode/ddns_noip.sh -O /home/ubuntu/client-mode/ddns_noip.sh
+	wget https://raw.hisi.ga/teasiu/histb/main/package_files/others/pre_files/common/home/ubuntu/client-mode/app.js -O /home/ubuntu/client-mode/app.js
+	chmod +x /home/ubuntu/client-mode/ddns_oray.sh
+	chmod +x /home/ubuntu/client-mode/ddns_noip.sh
+	chmod +x /home/ubuntu/client-mode/app.js
+	printStr yellow "ddns script updated"
+	printf $GREEN_LINE
+    fi
+}
+
 up_script
 up_typecho_theme
+up_ddns_ip
 
 _exit 0 "all upgraded successed"
