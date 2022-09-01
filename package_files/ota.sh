@@ -71,6 +71,7 @@ up_ddns_ip() {
 	chmod +x /home/ubuntu/client-mode/ddns_oray.sh
 	chmod +x /home/ubuntu/client-mode/ddns_noip.sh
 	chmod +x /home/ubuntu/client-mode/app.js
+	echo 123 > /home/ubuntu/client-mode/checkupdate
 	printStr yellow "ddns script updated"
 	printf $GREEN_LINE
     fi
