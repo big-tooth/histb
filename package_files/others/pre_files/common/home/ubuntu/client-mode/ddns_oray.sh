@@ -5,7 +5,7 @@ passwd=
 hostname=
 
 oldIP=`cat ddns_cur_ip3.dat`
-curExIP=`curl http://members.3322.org/dyndns/getip | tee ddns_cur_ip3.dat`
+curExIP=`curl http://ip.3322.net | tee ddns_cur_ip3.dat`
 
 if [ "$curExIP" != "$oldIP" ];then
     echo "Refresh IP from $oldIP to: $curExIP"

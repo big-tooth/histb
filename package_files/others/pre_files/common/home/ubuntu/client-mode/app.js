@@ -4,7 +4,7 @@ const alidns = require('./alidns.js');
 const config = require('./config.json');
 
 const simpleGetPubIpUrl = [
-    'ip.3322.org',
+    'ip.3322.net',
     'canhazip.com',
     'api.myip.la',
     'whatismyip.akamai.com',
