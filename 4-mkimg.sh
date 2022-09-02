@@ -1,5 +1,7 @@
 #!/bin/bash
 
+apt update && apt install android-sdk-ext4-utils -y
+
 timestamp=$(date +%Y%m%d)
 model=$(awk 'NR==1' target 2> /dev/null)
 ARCH=$(awk 'NR==2' target_arch 2> /dev/null)
