@@ -9,7 +9,7 @@ if [ ! -f "/etc/debian_version" ]; then
     exit 1
 fi
 mkdir -p /opt/note
-wget https://dl.ecoo.top:2096/update/soft_init/mrdoc.tar.gz
+wget https://www.ecoo.top/update/soft_init/mrdoc.tar.gz
 tar -zxvf mrdoc.tar.gz -C /opt/note
 apt update
 apt install uwsgi-plugin-python3 python3.8-venv -y

@@ -79,7 +79,7 @@
 	}
 	function dl_alert()
 	{
-	window.open("https://dl.ecoo.top:2096");
+	window.open("https://www.ecoo.top");
 	}
     </script>
     <div id="wrapper">
@@ -172,7 +172,7 @@
                                     <div class="col-md-12 full">
                                         <div class="intro1">
                                             <ul>
-                                                <li><strong>芯片型号 : </strong><?php echo $chipname ?> </li>  
+                                                <li><strong>芯片型号 : </strong><?php echo $chipname ?> </li>
                                                 <li><strong>内网IP : </strong>&nbsp;<?php echo $lanip ?>&nbsp;    <strong>外网网址 : </strong><a href="https://nas-xxxxx.any168.net">https://nas-xxxxx.any168.net【此功能只限专业版用户使用】</a></li>
                                                 <li><strong>系统版本号 : </strong><?php echo $nasversion ?>   </li>
 												<li><strong>初始默认登陆账号和密码 :</strong>root 1234 </li>
@@ -238,17 +238,17 @@
                                 <br>10. 可以建立自己的 socks 网络中转，安全地科学使用网络。
                                 <br>11. 还可以做更多事情，等待你的发掘。或加入用户微信群交流，或加入社区交流。
 
-                                </p>				 
+                                </p>
                                 <h4>常用的 Linux 命令</h4>
                                 <pre class="brush: html; highlight: [2,4]">
 					ssh root@192.168.x.x			终端登陆服务器
-					df -H							查看磁盘使用详情	
-					ls -al (ll)						查看当前目录下的所有文件	
-					apt update && apt upgrade -y	更新官方源已安装的软件	
+					df -H							查看磁盘使用详情
+					ls -al (ll)						查看当前目录下的所有文件
+					apt update && apt upgrade -y	更新官方源已安装的软件
 					cd /home/ubuntu					进入 /home/ubuntu 目录位置
 					wget http://xxx.com/xxx.xxx		下载网络链接文件到当前文件夹位置
 					passwd root						修改当前系统账号 root 的密码, 需要重复输入两次密码
-					
+
                                 </pre>
 
                                 <p>盒子内置有以下几个基本功能的软件安装小白脚本, 直接输入以下命令即可自动安装并自动配置, 即装即用。部分脚本安装位置在 /opt/ 路径下，如有需要，请自行更改脚本。</p>
@@ -270,7 +270,7 @@
 				提示: 连续按下两下 dd 即可删除光标所在的行
 				按一次键盘的 Insert 或者 i 按键, 即可进入当前文件的编辑模式
 				键盘上下左右移动光标,
-				修改编辑完毕, 按一次 Esc 按键退出编辑模式, 
+				修改编辑完毕, 按一次 Esc 按键退出编辑模式,
 				然后输入 :wq 这三个符号, 回车即可保存并退出文档
 				若不保存当前修改, 即输入 :q! 这三个符号,回车即可直接退出文档编辑
                          </pre>
@@ -354,29 +354,29 @@
                         type = http
                         local_ip = 192.168.1.222  #假设这是你的黑群IP
                         local_port = 5000
-                        subdomain = xxx-synology	
+                        subdomain = xxx-synology
                         #你就可以在外网用xxx-synology.any168.net域名直接访问黑群的管理页面了
                         # 添加以下内容变身2
                         [web-xxx-mycompany]
                         type = http
                         local_ip = 192.168.1.10  #假设这是你公司的文档服务器
                         local_port = 80
-                        subdomain = xxx-company	
+                        subdomain = xxx-company
                         #你就可以在外网用xxx-company.any168.net域名直接访问公司文档页面了
                         # 添加以下内容变身3
                         [web-xxx-myschool]
                         type = http
                         local_ip = 192.168.1.10  #假设这是你校园内网专用的考试查询内网地址
                         local_port = 80
-                        subdomain = xxx-myschool	
+                        subdomain = xxx-myschool
                         #你就可以在外网用xxx-myschool.any168.net域名直接访问校园内网了
-                        
+
                         </pre>
                         <p>检查自己修改的配置是否成功(多人使用, 只能使用唯一的xxx名称): </p>
                         <pre class="brush: html">
                         systemctl stop frpc			#先停止frp客户端的服务
                         frpc -c /etc/frp/frpc.ini		#试运行上面修改过的配置
-                        #最后, 如果出现的都是蓝色的并且都显示success的结果, 则ok, 
+                        #最后, 如果出现的都是蓝色的并且都显示success的结果, 则ok,
                         #否则重新修改xxx的名称避免和其他人的设置重复
                         #按ctrl+c结束命令
                         systemctl restart frpc		#重启服务
@@ -460,7 +460,7 @@
                                 <br>博客的用途非常广泛, 你甚至可以机智地把它当成家庭公告板提醒家里人上去写留言;
                                 <br>也可以当成自己的网络笔记本, 粘贴上你在网络上学习过的代码, 永久保留备查;
                                 <br>还可以把外网网址公开给私人好友, 分享你的能量</p>
-                           
+
 			     <h4>保存和重装后还原博客数据库 </h4>
 			         <p>在 recoverbackup 重装系统之前, 一定要备份博客的数据库
 			         <br>数据库位置路径在 /var/www/html/blog/usr/623d62d5e5e96.db db 名称可能会不相同
@@ -471,7 +471,7 @@
 			     cp /var/www/html/blog/usr/*.db /mnt/sda1/blog-data/myblog.db
 			     把数据库文档移出来到U盘指定目录并重命名为 myblog.db
 			     </pre>
-			     
+
 			     	<p>下次重新安装博客时, 点击 "我准备好了, 开始下一步", 数据库文件路径输入 /mnt/sda1/blog-data/myblog.db 然后无需设置密码直接点击 "确认, 开始安装", 然后点击 "使用原数据" 这样就把数据还原了, 打开还是原来一样的所有文章。
 			     	<br>注意: 如果你常常使用的是外网网址登陆博客, 请在后台设置里填写正确的外网网址。
 			     	<br>否则首页将会造成js错乱而影响访问。（可用内网 IP 地址登陆去修改）</p>
@@ -498,7 +498,7 @@
                         <div class="row">
 
                             <div class="col-md-12">
-                                <p>系统已经预先安装好 Samba 并自动共享 /home/ubuntu/downloads 文件夹, 
+                                <p>系统已经预先安装好 Samba 并自动共享 /home/ubuntu/downloads 文件夹,
                                 <br>在文件管理器输入: \\<?php echo $lanip ?> 即可访问</p>
                             </div>
                             <h4>修改配置文档, 把U盘的文件夹共享出来 </h4>
@@ -521,10 +521,10 @@
 			     </pre>
 			     <p>最后, 在文件管理器输入: \\<?php echo $lanip ?> 即可访问在网上邻居也可以找到这个共享文件夹了</p>
 			     <hr>
-			     
+
 
                         </div>
-                       
+
 
                     </section>
                     <!-- end section -->
@@ -624,15 +624,15 @@
                                 <br>Windwows 映射 WebDAV 目录
                                 <br>开启服务此电脑右键-管理-服务-WebClient 设为自动, 停止服务
 				 <br>修改注册表
-					<br>修改注册表使得WIN同时支持http和https: 
+					<br>修改注册表使得WIN同时支持http和https:
 				<br>定位到
 				<br>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WebClient\Parameters
-				<br>把BasicAuthLevel 值改成2, 即同时支持http和https, 默认只支持https, 然后重启服务: 
+				<br>把BasicAuthLevel 值改成2, 即同时支持http和https, 默认只支持https, 然后重启服务:
 				<br>磁盘映射
 				<br>在Windows资源管理器空白处右键, 选添加一个网络位置
 				<br>填写正确的连接加端口号, 默认登陆用户名和密码 <strong>admin admin</strong>
 				<br><pre class="brush: html">
-				修改用户名和密码: 
+				修改用户名和密码:
 				echo -n 'admin:' | tee /etc/nginx/passwords.list
 				openssl passwd -apr1 | tee -a /etc/nginx/passwords.list
 				nginx -s reload
@@ -709,13 +709,13 @@
                                 touch git-daemon-export-ok
                                 echo "我的第一个新仓库" > description
                                 </pre></p>
-                                <p>客户端克隆本服仓库命令: 
+                                <p>客户端克隆本服仓库命令:
                                 <br><pre class="brush: html">
                                 git clone root@192.168.xx.xx:/mnt/sda1/gitweb/xxx.git
                                 密码与系统相同
                                 </pre>
                                 </p>
-                                
+
                             </div>
                             <!-- end col -->
                         </div>
@@ -730,7 +730,7 @@
                             <div class="col-md-8">
                                 <h4 id="line7_7">MiniDLNA 局域网音视频广播 - </h4>
                                 <br><pre class="brush: html">
-                                apt install minidlna			# 安装 MiniDLNA 软件 
+                                apt install minidlna			# 安装 MiniDLNA 软件
                                 vi /etc/minidlna.conf			# 修改配置文件
                                 将 media_dir=/var/lib/minidlna 修改为 media_dir=/mnt/sda1/minidlna
                                 mkdir /mnt/sda1/minidlna		# 在U盘创建目录
@@ -961,7 +961,7 @@
                                 	chmod 777 -R /mnt/sda1/docker			# 赋予权限
                                 	vi /lib/systemd/system/docker.service	# 编辑配置文件
                                 	ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
-                                	插上一句 --graph="/mnt/sda1/docker" 变为如下: 
+                                	插上一句 --graph="/mnt/sda1/docker" 变为如下:
                                 	ExecStart=/usr/bin/dockerd --graph="/mnt/sda1/docker" -H fd:// --containerd=/run/containerd/containerd.sock
                                 	systemctl daemon-reload
                                 	systemctl start docker
@@ -1044,7 +1044,7 @@
 
                     </section>
                     <!-- end section -->
-                    
+
                     <section id="line13" class="section">
 
                         <div class="row">
@@ -1063,7 +1063,7 @@
                                 <hr>
 
                                 <h4>更新日志</h4>
-				<iframe width="760" height="315" src="https://dl.ecoo.top:2096/changeslog.html" frameborder="0" allowfullscreen></iframe>
+				<iframe width="760" height="315" src="https://www.ecoo.top/changeslog.html" frameborder="0" allowfullscreen></iframe>
 
 
                             </div>
@@ -1086,9 +1086,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p>盒子内核及运行设计版权归神雕 teasiu@ecoo.top, 任何人使用或移植借鉴须注明出自 www.ecoo.top</p>
-                                <p>未经作者授权, 不得将系统用于盈利售卖, 不得用于衍生的任何软件变相收费否则视为侵权行为! 一旦被举报, 必将追究!</p>                        
+                                <p>未经作者授权, 不得将系统用于盈利售卖, 不得用于衍生的任何软件变相收费否则视为侵权行为! 一旦被举报, 必将追究!</p>
                                 <p>官方网站 <a href=" https://www.ecoo.top" target="_blank">www.ecoo.top</a></p>
-                            
+
                             </div>
                         </div>
                         <!-- end row -->
