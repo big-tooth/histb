@@ -1,0 +1,33 @@
+###########################################################
+#   Description: Compile push2gitee by GitHub Actions      #
+#   Based on:    										  #
+#   Author: Teasiu                                        #
+###########################################################
+
+name: autopush2gitee
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+
+  push:
+    branches: 
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@main
+
+    - name: Mirror the Github organization repos to Gitee.
+      uses: Yikun/hub-mirror-action@master
+      with:
+        src: github/teasiu
+        dst: gitee/teasiu
+        dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+        dst_token: ${{ secrets.GITEE_TOKEN }}
+        account_type: org
+
