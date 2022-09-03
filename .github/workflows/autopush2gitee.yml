@@ -26,4 +26,4 @@ jobs:
         dst: gitee/teasiu
         dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
         dst_token: ${{ secrets.GITEE_TOKEN }}
-
+        static_list: "histb"
