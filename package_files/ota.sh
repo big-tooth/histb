@@ -80,7 +80,7 @@ up_ddns_ip() {
 up_fix_ubuntu() {
     if [ -d /home/ubuntu ]; then
 	printStr yellow "fix ubuntu: update chown permission"
-	chmod -R ubuntu:ubuntu /home/ubuntu
+	chown -R ubuntu:ubuntu /home/ubuntu
 	printStr yellow "chown permission updated"
 	printf $GREEN_LINE
     fi
