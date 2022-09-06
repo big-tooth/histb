@@ -7,4 +7,4 @@ cp -a package_files/others/sbin/${ARCH}/* ${ROOTFS}/sbin
 chmod 777 -R ${ROOTFS}/etc/profile.d
 chmod 755 ${ROOTFS}/usr/bin/nasinfo
 sed -i "s/ports.ubuntu.com/repo.huaweicloud.com/g" ${ROOTFS}/etc/apt/sources.list
-echo "$(date +%Y%m%d)" > ${ROOTFS}/etc/nasversion
+echo "20220808-1" > ${ROOTFS}/etc/nasversion
