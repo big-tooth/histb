@@ -57,6 +57,8 @@ echo "net.ipv4.udp_wmem_min=4195328" >> /etc/sysctl.d/10-udp-mem.conf
 crontab -l > /tmp/crontab.$$
 echo '0 */3 * * * /usr/bin/ramfree.sh' >> /tmp/crontab.$$
 crontab /tmp/crontab.$$
+mkdir /var/etc
+chmod 6777 /var/etc
 apt-get autoremove --purge -y
 apt-get autoclean -y
 apt-get clean -y

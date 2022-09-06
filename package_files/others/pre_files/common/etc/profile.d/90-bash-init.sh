@@ -1,8 +1,8 @@
 clear
-alias copyright='rm /etc/copyright ; /etc/profile.d/90-bash-init.sh'
+alias copyright='rm /var/etc/copyright ; /etc/profile.d/90-bash-init.sh'
 IP=$(ifconfig eth0 | grep '\<inet\>'| grep -v '127.0.0.1' | awk '{print $2}' | awk 'NR==1')
 
-if [ ! -e /etc/copyright ] 2> /dev/null
+if [ ! -e /var/etc/copyright ] 2> /dev/null
 then
 	echo -e "欢迎使用 \e[31m海思机顶盒微型 NAS 服务器 $(getconf LONG_BIT)-bit 系统\e[0m
 
@@ -23,6 +23,6 @@ then
 	echo -e "提示: \e[31m本内容仅显示一次, 烦请仔细阅读, 后续执行 'copyright' 指令即可再次阅读本页面!\e[0m\n"
 	sleep 3
 	echo -ne "\e[32m" ; read -p "如果你同意以上内容, 请按下 [回车] 键以继续 ..." Key ;echo -ne "\e[0m"
-	date > /etc/copyright
+	date > /var/etc/copyright
 	. /etc/profile
 fi
