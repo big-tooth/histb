@@ -1,22 +1,28 @@
 # install aria2
 install_package 00-nginx.sh
 
-cat << EOF | LC_ALL=C LANGUAGE=C LANG=C chroot ${ROOTFS}
-apt-get install -y aria2
-EOF
+aria2_url="https://github.com/P3TERX/Aria2-Pro-Core/releases/download/1.36.0_2021.08.22/aria2-1.36.0-static-linux-${ARCH}.tar.gz"
+aria2_file=$(basename ${aria2_url})
 
-aria2_file="AriaNg-1.2.3.zip"
-aria2_url="https://git.histb.com/mayswind/AriaNg/releases/download/1.2.3/${aria2_file}"
+aria2ng_url="https://git.histb.com/mayswind/AriaNg/releases/download/1.2.3/AriaNg-1.2.3.zip"
+aria2ng_file=$(basename ${aria2ng_url})
 
 if [ ! -f ${DOWNLOAD_PATH}/${aria2_file} ]; then
     wget_cmd ${aria2_url}
 fi
 
+if [ ! -f ${DOWNLOAD_PATH}/${aria2ng_file} ]; then
+    wget_cmd ${aria2ng_url}
+fi
+
 cd ${WORK_PATH}
 mkdir -p ${ROOTFS}/home/ubuntu/downloads ${WWW_PATH}/ariang ${ROOTFS}/usr/local/aria2
-chmod -R 777 ${ROOTFS}/home/ubuntu/downloads
 chown nobody:nogroup ${ROOTFS}/home/ubuntu/downloads
-unzip -o -q ${DOWNLOAD_PATH}/${aria2_file} -d ${WWW_PATH}/ariang
+chmod -R 777 ${ROOTFS}/home/ubuntu/downloads
+unzip -o -q ${DOWNLOAD_PATH}/${aria2ng_file} -d ${WWW_PATH}/ariang
+
+tar -xvzf ${aria2_file} -C /usr/bin
+chmod 777 /usr/bin/aria2c
 touch ${ROOTFS}/usr/local/aria2/aria2.session
 chmod 777 ${ROOTFS}/usr/local/aria2/aria2.session
 chmod 755 ${ROOTFS}/usr/local/bin/update-tracker.sh

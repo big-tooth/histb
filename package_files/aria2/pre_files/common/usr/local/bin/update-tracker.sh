@@ -1,5 +1,16 @@
 #!/bin/bash
 
+function GET_VARIABLE() {
+	local Result="$(grep "$1=" $2 2> /dev/null | grep -v "#" | awk -F '=' '{print $2}')"
+	if [[ ${Result} && $? == 0 ]]
+	then
+		eval echo "${Result}"
+		return 0
+	else
+		return 1
+	fi
+}
+
 case $1 in 
 -a)
 	case $2 in
@@ -12,11 +23,14 @@ case $1 in
 	;;
 	esac
 ;;
+-u)
+	tracker_type=$(GET_VARIABLE /usr/local/aria2/aria2.conf)
+;;
 *)
 	while true
 	do
 		clear
-		echo -e "Aria2 BT Tracker 自动更新脚本
+		echo -e "Aria2 BT Tracker 一键更新脚本
 
 	1. 完整列表 (推荐)
 		\e[33m最完整的 Tracker 列表, 最有效的 BT 提速方式!\e[0m
@@ -77,9 +91,10 @@ then
 fi
 
 echo "移除旧 BT Tracker-$tracker_type 列表 ..."
-sed -i "/bt-tracker=/d" $config_file
+sed -i "/bt-tracker=/d;/trackermode=/d" $config_file
 echo "写入新 BT Tracker-$tracker_type 列表 ..."
 echo -e "\nbt-tracker=$(cat $tracker_tmpfile)" >> $config_file
+echo -e "\ntrackermode=${tracker_type}" >> $config_file
 
 if [[ $(systemctl is-enabled aria2c 2> /dev/null) == enabled ]]
 then

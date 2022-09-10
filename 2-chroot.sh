@@ -20,7 +20,7 @@ mknod /dev/tty    c 5   0
 apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get install -y jq ntfs-3g smartmontools usbutils dnsutils network-manager \
 locales wget curl vim iputils-ping bash-completion \
-ssh net-tools sudo \
+ssh net-tools sudo ca-certificates \
 cron ethtool zip ifupdown htop rsyslog dialog resolvconf
 sed -i -e 's/#PasswordAuthentication/PasswordAuthentication/g' /etc/ssh/sshd_config
 echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
