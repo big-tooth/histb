@@ -16,7 +16,7 @@ echo -e "\e[33m
 	  浏览详细使用教程请访问: \e[32mhttp://$IP\e[0m
 	  访问我们的官网: \e[32mhttps://www.ecoo.top\e[0m
 
-   设备名称 : ${DEVICE}_$(egrep -oa "hi3798.+reg" /dev/mmcblk0p1 2> /dev/null | cut -d '_' -f1)
+   设备名称 : ${DEVICE}_$(egrep -oa "hi3798.+reg" /dev/mmcblk0p1 2> /dev/null | cut -d '_' -f1 | sort | uniq)
    系统版本 : $(awk -F '[= "]' '/PRETTY_NAME/{print $3,$4,$5}' /etc/os-release) | V$(cat /etc/nasversion)-$(uname -r)-$(getconf LONG_BIT)
    可用存储 : $(df -m / | grep -v File | awk '{a=$4*100/$2;b=$4} {printf("%.1f%s %.1fM\n",a,"%",b)}')
    可用内存 : $(free -m | grep Mem | awk '{a=$7*100/$2;b=$7} {printf("%.1f%s %.1fM\n",a,"%",b)}') | $(free -m | grep Swap | awk '{a=$4*100/$2;b=$4} {printf("%.1f%s %.1fM\n",a,"%",b)}')
@@ -27,7 +27,6 @@ echo -e "\e[33m
 "
 
 alias reload='. /etc/profile'
-alias ramfree='sync && echo 3 > /proc/sys/vm/drop_caches'
 alias cls='clear'
 alias syslog='cat /var/log/syslog'
 alias unmount='umount -l'
