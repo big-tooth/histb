@@ -2,7 +2,13 @@
 cd ${WORK_PATH}
 
 chmod 777 -R package_files/others/sbin
-cp -a package_files/others/sbin/${ARCH}/* ${ROOTFS}/sbin
+
+if [ -d package_files/others/sbin/common ]; then
+	cp -a package_files/others/sbin/common/* ${ROOTFS}/sbin
+fi
+if [ -d package_files/others/sbin/${ARCH} ]; then
+	cp -a package_files/others/sbin/${ARCH}/* ${ROOTFS}/sbin
+fi
 
 chmod 777 -R ${ROOTFS}/etc/profile.d
 chmod 755 ${ROOTFS}/usr/bin/nasinfo
