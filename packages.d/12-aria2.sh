@@ -1,7 +1,7 @@
 # install aria2
 install_package 00-nginx.sh
 
-aria2_url="https://github.com/P3TERX/Aria2-Pro-Core/releases/download/1.36.0_2021.08.22/aria2-1.36.0-static-linux-${ARCH}.tar.gz"
+aria2_url="https://git.histb.com/P3TERX/Aria2-Pro-Core/releases/download/1.36.0_2021.08.22/aria2-1.36.0-static-linux-${ARCH}.tar.gz"
 aria2_file=$(basename ${aria2_url})
 
 aria2ng_url="https://git.histb.com/mayswind/AriaNg/releases/download/1.2.3/AriaNg-1.2.3.zip"
