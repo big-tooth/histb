@@ -21,8 +21,8 @@ chown nobody:nogroup ${ROOTFS}/home/ubuntu/downloads
 chmod -R 777 ${ROOTFS}/home/ubuntu/downloads
 unzip -o -q ${DOWNLOAD_PATH}/${aria2ng_file} -d ${WWW_PATH}/ariang
 
-tar -xvzf ${aria2_file} -C /usr/bin
-chmod 777 /usr/bin/aria2c
+tar -xvzf ${DOWNLOAD_PATH}/${aria2_file} -C ${ROOTFS}/usr/bin
+chmod 755 ${ROOTFS}/usr/bin/aria2c
 touch ${ROOTFS}/usr/local/aria2/aria2.session
 chmod 777 ${ROOTFS}/usr/local/aria2/aria2.session
 chmod 755 ${ROOTFS}/usr/local/bin/update-tracker.sh
