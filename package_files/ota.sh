@@ -97,10 +97,22 @@ up_casaos_script() {
     fi
 }
 
+up_v2ray_script() {
+    uuidcheck=`grep 2319b3fcacb8 /usr/bin/install-v2ray.sh`
+    if [ "$uuidcheck" == "" ]; then
+      printStr yellow "update v2ray_script"
+      wget https://gitee.com/teasiu/histb/raw/main/package_files/bin_scripts/install-v2ray.sh -O /usr/bin/install-v2ray.sh
+      chmod +x /usr/bin/install-v2ray.sh
+      printStr yellow "v2ray_script updated"
+      printf $GREEN_LINE
+    fi
+}
+
 up_script
 up_typecho_theme
 up_ddns_ip
 up_fix_ubuntu
 up_casaos_script
+up_v2ray_script
 
 _exit 0 "all upgraded successed"

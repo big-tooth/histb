@@ -291,7 +291,7 @@ decompression() {
 
 install_file() {
   NAME="$1"
-  if [[ "$NAME" == 'v2ray' ]] || [[ "$NAME" == 'v2ctl' ]]; then
+  if [ "$NAME" == 'v2ray' ] ; then
     install -m 755 "${TMP_DIRECTORY}/$NAME" "/usr/local/bin/$NAME"
   elif [[ "$NAME" == 'geoip.dat' ]] || [[ "$NAME" == 'geosite.dat' ]]; then
     install -m 644 "${TMP_DIRECTORY}/$NAME" "${DAT_PATH}/$NAME"
@@ -301,7 +301,6 @@ install_file() {
 install_v2ray() {
   # Install V2Ray binary to /usr/local/bin/ and $DAT_PATH
   install_file v2ray
-  install_file v2ctl
   install -d "$DAT_PATH"
   # If the file exists, geoip.dat and geosite.dat will not be installed or updated
   if [[ ! -f "${DAT_PATH}/.undat" ]]; then
@@ -315,159 +314,111 @@ install_v2ray() {
     install -d "$JSON_PATH"
     cat <<EOT > "${JSON_PATH}/config.json"
 {
-  "log": {
-    "access": "/var/log/v2ray/access.log",
-    "error": "/var/log/v2ray/error.log",
-    "loglevel": "warning"
+  "dns": {
+    "hosts": {
+      "domain:googleapis.cn": "googleapis.com"
+    },
+    "servers": [
+      "1.1.1.1"
+    ]
   },
   "inbounds": [
     {
-      "tag": "socks",
       "port": 10808,
-      "listen": "0.0.0.0",
       "protocol": "socks",
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ]
-      },
       "settings": {
         "auth": "noauth",
         "udp": true,
-        "allowTransparent": false
-      }
-    },
-    {
-      "tag": "http",
-      "port": 10809,
-      "listen": "0.0.0.0",
-      "protocol": "http",
+        "userLevel": 8
+      },
       "sniffing": {
-        "enabled": true,
         "destOverride": [
           "http",
           "tls"
-        ]
+        ],
+        "enabled": true
       },
+      "tag": "socks"
+    },
+    {
+      "port": 10809,
+      "protocol": "http",
       "settings": {
-        "udp": false,
-        "allowTransparent": false
-      }
+        "userLevel": 8
+      },
+      "tag": "http"
     }
   ],
+  "log": {
+    "loglevel": "warning"
+  },
   "outbounds": [
     {
-      "tag": "proxy",
-      "protocol": "vless",
+      "mux": {
+        "concurrency": 8,
+        "enabled": false
+      },
+      "protocol": "vmess",
       "settings": {
         "vnext": [
           {
-            "address": "slitazcn.herokuapp.com",
-            "port": 443,
+            "address": "18.139.228.198",
+            "port": 8888,
             "users": [
               {
-                "id": "5aa9e0c6-8c8e-11ec-a8a3-0242ac120002",
                 "alterId": 0,
-                "email": "t@t.tt",
-                "security": "auto",
-                "encryption": "none",
-                "flow": ""
+                "encryption": "",
+                "flow": "",
+                "id": "5db82131-d15d-4626-97fb-2319b3fcacb8",
+                "level": 8,
+                "security": "chacha20-poly1305"
               }
             ]
           }
         ]
       },
       "streamSettings": {
-        "network": "ws",
-        "security": "tls",
-        "tlsSettings": {
-          "allowInsecure": false,
-          "serverName": "slitazcn.herokuapp.com"
-        },
-        "wsSettings": {
-          "path": "/5aa9e0c6-8c8e-11ec-a8a3-0242ac120002-vless",
-          "headers": {
-            "Host": "slitazcn.herokuapp.com"
+        "network": "tcp",
+        "security": "",
+        "tcpSettings": {
+          "header": {
+            "type": "none"
           }
         }
       },
-      "mux": {
-        "enabled": false,
-        "concurrency": -1
-      }
+      "tag": "proxy"
     },
     {
-      "tag": "direct",
       "protocol": "freedom",
-      "settings": {}
+      "settings": {},
+      "tag": "direct"
     },
     {
-      "tag": "block",
       "protocol": "blackhole",
       "settings": {
         "response": {
           "type": "http"
         }
-      }
+      },
+      "tag": "block"
     }
   ],
   "routing": {
+    "domainMatcher": "mph",
     "domainStrategy": "IPIfNonMatch",
-    "domainMatcher": "linear",
     "rules": [
       {
-        "type": "field",
-        "inboundTag": [
-          "api"
-        ],
-        "outboundTag": "api",
-        "enabled": true
-      },
-      {
-        "type": "field",
-        "outboundTag": "direct",
-        "domain": [
-          "domain:example-example.com",
-          "domain:example-example2.com"
-        ],
-        "enabled": true
-      },
-      {
-        "type": "field",
-        "outboundTag": "block",
-        "domain": [
-          "geosite:category-ads-all"
-        ],
-        "enabled": true
-      },
-      {
-        "type": "field",
-        "outboundTag": "direct",
-        "domain": [
-          "geosite:cn"
-        ],
-        "enabled": true
-      },
-      {
-        "type": "field",
-        "outboundTag": "direct",
         "ip": [
-          "geoip:private",
-          "geoip:cn"
+          "1.1.1.1"
         ],
-        "enabled": true
-      },
-      {
-        "type": "field",
-        "port": "0-65535",
         "outboundTag": "proxy",
-        "enabled": true
+        "port": "53",
+        "type": "field"
       }
     ]
   }
 }
+
 EOT
     CONFIG_NEW='1'
   fi
@@ -518,13 +469,13 @@ ExecStart=/usr/local/bin/v2ray -confdir $JSONS_PATH" |
 # Or all changes you made will be lost!  # Refer: https://www.freedesktop.org/software/systemd/man/systemd.unit.html
 [Service]
 ExecStart=
-ExecStart=/usr/local/bin/v2ray -config ${JSON_PATH}/config.json" > \
+ExecStart=/usr/local/bin/v2ray run -config ${JSON_PATH}/config.json" > \
       '/etc/systemd/system/v2ray.service.d/10-donot_touch_single_conf.conf'
     echo "# In case you have a good reason to do so, duplicate this file in the same directory and make your customizes there.
 # Or all changes you made will be lost!  # Refer: https://www.freedesktop.org/software/systemd/man/systemd.unit.html
 [Service]
 ExecStart=
-ExecStart=/usr/local/bin/v2ray -config ${JSON_PATH}/%i.json" > \
+ExecStart=/usr/local/bin/v2ray run -config ${JSON_PATH}/%i.json" > \
       '/etc/systemd/system/v2ray@.service.d/10-donot_touch_single_conf.conf'
   fi
   echo "info: Systemd service files have been installed successfully!"
@@ -588,7 +539,6 @@ remove_v2ray() {
       stop_v2ray
     fi
     if ! ("rm" -r '/usr/local/bin/v2ray' \
-      '/usr/local/bin/v2ctl' \
       "$DAT_PATH" \
       '/etc/systemd/system/v2ray.service' \
       '/etc/systemd/system/v2ray@.service' \
@@ -598,7 +548,6 @@ remove_v2ray() {
       exit 1
     else
       echo 'removed: /usr/local/bin/v2ray'
-      echo 'removed: /usr/local/bin/v2ctl'
       echo "removed: $DAT_PATH"
       echo 'removed: /etc/systemd/system/v2ray.service'
       echo 'removed: /etc/systemd/system/v2ray@.service'
@@ -626,7 +575,7 @@ show_help() {
   echo "usage: $0 [--remove | --version number | -c | -f | -h | -l | -p]"
   echo '  [-p address] [--version number | -c | -f]'
   echo '  --remove        Remove V2Ray'
-  echo '  --version       Install the specified version of V2Ray, e.g., --version v4.18.0'
+  echo '  --version       e.g., --version v5.1.0'
   echo '  -c, --check     Check if V2Ray can be updated'
   echo '  -f, --force     Force installation of the latest version of V2Ray'
   echo '  -h, --help      Show help'
@@ -693,7 +642,6 @@ main() {
   install_v2ray
   install_startup_service_file
   echo 'installed: /usr/local/bin/v2ray'
-  echo 'installed: /usr/local/bin/v2ctl'
   # If the file exists, the content output of installing or updating geoip.dat and geosite.dat will not be displayed
   if [[ ! -f "${DAT_PATH}/.undat" ]]; then
     echo "installed: ${DAT_PATH}/geoip.dat"
@@ -733,7 +681,6 @@ main() {
   if [[ "$V2RAY_RUNNING" -eq '1' ]]; then
     start_v2ray
   else
-    #echo 'Please execute the command: systemctl enable v2ray; systemctl start v2ray'
     systemctl enable v2ray
     systemctl start v2ray
   fi
