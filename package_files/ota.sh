@@ -86,9 +86,21 @@ up_fix_ubuntu() {
     fi
 }
 
+up_casaos_script() {
+    casaosversioncheck=`grep 0.3.6 /usr/bin/install-casaos.sh`
+    if [ "$casaosversioncheck" == "" ]; then
+      printStr yellow "update casaos_script"
+      wget https://gitee.com/teasiu/histb/raw/main/package_files/bin_scripts/install-casaos.sh -O /usr/bin/install-casaos.sh
+      chmod +x /usr/bin/install-casaos.sh
+      printStr yellow "casaos_script updated"
+      printf $GREEN_LINE
+    fi
+}
+
 up_script
 up_typecho_theme
 up_ddns_ip
 up_fix_ubuntu
+up_casaos_script
 
 _exit 0 "all upgraded successed"
