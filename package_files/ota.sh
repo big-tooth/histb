@@ -108,11 +108,22 @@ up_v2ray_script() {
     fi
 }
 
+up_kod_script() {
+    if [ ! -f /usr/bin/install-kod.sh ]; then
+      printStr yellow "update kod_script"
+      wget https://gitee.com/teasiu/histb/raw/main/package_files/bin_scripts/install-kod.sh -O /usr/bin/install-kod.sh
+      chmod +x /usr/bin/install-kod.sh
+      printStr yellow "kod_script updated"
+      printf $GREEN_LINE
+    fi
+}
+
 up_script
 up_typecho_theme
 up_ddns_ip
 up_fix_ubuntu
 up_casaos_script
 up_v2ray_script
+up_kod_script
 
 _exit 0 "all upgraded successed"
