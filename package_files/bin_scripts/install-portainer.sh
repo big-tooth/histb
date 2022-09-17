@@ -1,6 +1,8 @@
 #!/bin/bash
 # Only support Debian 10
 
+portainer_version="2.14.0"
+
 if [ `whoami` != "root" ]; then
     echo "sudo or root is required!"
     exit 1
@@ -10,6 +12,7 @@ if [ ! -f "/etc/debian_version" ]; then
     echo "Boss, do you want to try debian?"
     exit 1
 fi
+
 check_dockerimagep(){
   docker inspect Portainer -f '{{.Name}}' > /dev/null
   if [ $? -eq 0 ] ;then
@@ -20,6 +23,7 @@ check_dockerimagep(){
     echo "容器管理工具已经安装，浏览器打开 http://$local_ip:9000 进入设置"
   fi
 }
+
 install_dockerimagep(){
 	docker run -dit \
 	--name Portainer \
@@ -27,10 +31,20 @@ install_dockerimagep(){
 	--network=host \
 	-v /var/run/docker.sock:/var/run/docker.sock \
 	-v /opt/Portainer:/data \
+	-v /opt/Portainer/portainer_public:/public \
 	-v /dev:/dev \
-	portainer/portainer-ce
+	portainer/portainer-ce:${portainer_version}
 }
 local_ip=$(ifconfig eth0 | grep '\<inet\>'| grep -v '127.0.0.1' | awk '{ print $2}' | awk 'NR==1')
+if [ ! -d /opt/Portainer/portainer_public ] ;then
+  mkdir -p /opt/Portainer
+  wget --no-check-certificate https://dl.ecoo.top:2096/update/soft_init/portainer-ce-cn-${portainer_version}.zip -P /opt/Portainer && echo "Successed download chinese language package"
+  if [ ! -f /opt/Portainer/portainer-ce-cn-${portainer_version}.zip ]; then 
+    echo "donwload chinese language package failed" && exit
+  fi
+  unzip -o /opt/Portainer/portainer-ce-cn-${portainer_version}.zip -d /opt/Portainer
+  rm -f /opt/Portainer/portainer-ce-cn-${portainer_version}.zip
+fi
 if [ -x "$(command -v docker)" ]; then
   echo "docker已安装." >&2
   check_dockerimagep
