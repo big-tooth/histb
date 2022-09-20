@@ -19,6 +19,13 @@ then
     for i in $init_scripts ;do
         source $i
     done
+
+    # set model
+    model=$(sed 's/ /\n/g' /proc/cmdline | grep model| head -n 1| cut -d '=' -f2)
+    [ "$(getconf LONG_BIT)" = "64" ] && is64="-64" || is64=""
+    cp -a /var/lib/bootargs/bootargs7-${model}${is64}.bin /usr/bin/bootargs7.bin
+    cp -a /var/lib/bootargs/bootargs_input-${model}${is64}.txt /etc/bootargs_input.txt
+    hostnamectl set-hostname hi3798$model
 fi
 if [ ! -f /swapfile ]
 then

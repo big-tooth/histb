@@ -4,14 +4,13 @@ apt update && apt install android-sdk-ext4-utils -y
 
 timestamp=20220808
 #timestamp=$(date +%Y%m%d)
-model=$(awk 'NR==1' target 2> /dev/null)
 ARCH=$(awk 'NR==2' target_arch 2> /dev/null)
 if [ "$ARCH" = "arm64" ]; then
     arch_suffix="-64"
 else
     arch_suffix="-32"
 fi
-file_prefix="Ubuntu-$(awk 'NR==1' target_arch 2> /dev/null)-${ARCH}-hi3798${model}"
+file_prefix="Ubuntu-$(awk 'NR==1' target_arch 2> /dev/null)-${ARCH}"
 img_file="${file_prefix}-${timestamp}-MD5.img"
 TMPFS="tmp"
 
@@ -48,7 +47,7 @@ echo
 echo "Packing ext4 for backup partition"
 mkdir backup
 backup_ext4="${file_prefix}-${timestamp}-backup-MD5.ext4"
-cp $gz_file backup/backup-${model}${arch_suffix}.gz
+cp $gz_file backup/backup${arch_suffix}.gz
 sync
 make_ext4fs -l 512M -s $backup_ext4 backup/
 
