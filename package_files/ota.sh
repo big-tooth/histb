@@ -118,6 +118,16 @@ up_kod_script() {
     fi
 }
 
+up_wp_script() {
+    if [ ! -f /usr/bin/install-wordpress.sh ]; then
+      printStr yellow "update wordpress_script"
+      wget https://gitee.com/teasiu/histb/raw/main/package_files/bin_scripts/install-wordpress.sh -O /usr/bin/install-wordpress.sh
+      chmod +x /usr/bin/install-wordpress.sh
+      printStr yellow "wordpress_script updated"
+      printf $GREEN_LINE
+    fi
+}
+
 up_script
 up_typecho_theme
 up_ddns_ip
@@ -125,5 +135,6 @@ up_fix_ubuntu
 up_casaos_script
 up_v2ray_script
 up_kod_script
+up_wp_script
 
 _exit 0 "all upgraded successed"
