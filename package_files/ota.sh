@@ -128,6 +128,16 @@ up_wp_script() {
     fi
 }
 
+up_photoalbum_script() {
+    if [ ! -f /usr/bin/install-photoalbum.sh ]; then
+      printStr yellow "update photoalbum_script"
+      wget https://gitee.com/teasiu/histb/raw/main/package_files/bin_scripts/install-photoalbum.sh -O /usr/bin/install-photoalbum.sh
+      chmod +x /usr/bin/install-photoalbum.sh
+      printStr yellow "photoalbum_script updated"
+      printf $GREEN_LINE
+    fi
+}
+
 up_script
 up_typecho_theme
 up_ddns_ip
@@ -136,5 +146,6 @@ up_casaos_script
 up_v2ray_script
 up_kod_script
 up_wp_script
+up_photoalbum_script
 
 _exit 0 "all upgraded successed"
