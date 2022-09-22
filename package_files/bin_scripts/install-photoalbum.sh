@@ -82,6 +82,7 @@ prepare_nodejs() {
   if [ -f /etc/apt/sources.list.d/nodesource.list ]; then
   rm -r /etc/apt/sources.list.d/nodesource.list
   fi
+  sudo apt-get -y install software-properties-common
   sudo add-apt-repository -y -r ppa:chris-lea/node.js
   sudo rm -f /etc/apt/sources.list.d/chris-lea-node_js-*.list
   sudo rm -f /etc/apt/sources.list.d/chris-lea-node_js-*.list.save
