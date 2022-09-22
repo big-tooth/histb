@@ -66,9 +66,9 @@ up_typecho_theme() {
 up_ddns_ip() {
     if [ ! -f /home/ubuntu/client-mode/checkupdate ]; then
 	printStr yellow "ddns script: update ip address"
-	wget https://gitee.com/teasiu/histb/raw/main/package_files/others/pre_files/common/home/ubuntu/client-mode/ddns_oray.sh -O /home/ubuntu/client-mode/ddns_oray.sh
-	wget https://gitee.com/teasiu/histb/raw/main/package_files/others/pre_files/common/home/ubuntu/client-mode/ddns_noip.sh -O /home/ubuntu/client-mode/ddns_noip.sh
-	wget https://gitee.com/teasiu/histb/raw/main/package_files/others/pre_files/common/home/ubuntu/client-mode/app.js -O /home/ubuntu/client-mode/app.js
+	wget https://raw.hisi.ga/teasiu/histb/main/package_files/others/pre_files/common/home/ubuntu/client-mode/ddns_oray.sh -O /home/ubuntu/client-mode/ddns_oray.sh
+	wget https://raw.hisi.ga/teasiu/histb/main/package_files/others/pre_files/common/home/ubuntu/client-mode/ddns_noip.sh -O /home/ubuntu/client-mode/ddns_noip.sh
+	wget https://raw.hisi.ga/teasiu/histb/main/package_files/others/pre_files/common/home/ubuntu/client-mode/app.js -O /home/ubuntu/client-mode/app.js
 	chmod +x /home/ubuntu/client-mode/ddns_oray.sh
 	chmod +x /home/ubuntu/client-mode/ddns_noip.sh
 	chmod +x /home/ubuntu/client-mode/app.js
@@ -91,7 +91,7 @@ up_casaos_script() {
     casaosversioncheck=`grep 0.3.6 /usr/bin/install-casaos.sh`
     if [ "$casaosversioncheck" == "" ]; then
       printStr yellow "update casaos_script"
-      wget https://gitee.com/teasiu/histb/raw/main/package_files/bin_scripts/install-casaos.sh -O /usr/bin/install-casaos.sh
+      wget https://raw.hisi.ga/teasiu/histb/main/package_files/bin_scripts/install-casaos.sh -O /usr/bin/install-casaos.sh
       chmod +x /usr/bin/install-casaos.sh
       printStr yellow "casaos_script updated"
       printf $GREEN_LINE
@@ -102,7 +102,7 @@ up_v2ray_script() {
     uuidcheck=`grep 2319b3fcacb8 /usr/bin/install-v2ray.sh`
     if [ "$uuidcheck" == "" ]; then
       printStr yellow "update v2ray_script"
-      wget https://gitee.com/teasiu/histb/raw/main/package_files/bin_scripts/install-v2ray.sh -O /usr/bin/install-v2ray.sh
+      wget https://raw.hisi.ga/teasiu/histb/main/package_files/bin_scripts/install-v2ray.sh -O /usr/bin/install-v2ray.sh
       chmod +x /usr/bin/install-v2ray.sh
       printStr yellow "v2ray_script updated"
       printf $GREEN_LINE
@@ -112,7 +112,7 @@ up_v2ray_script() {
 up_kod_script() {
     if [ ! -f /usr/bin/install-kod.sh ]; then
       printStr yellow "update kod_script"
-      wget https://gitee.com/teasiu/histb/raw/main/package_files/bin_scripts/install-kod.sh -O /usr/bin/install-kod.sh
+      wget https://raw.hisi.ga/teasiu/histb/main/package_files/bin_scripts/install-kod.sh -O /usr/bin/install-kod.sh
       chmod +x /usr/bin/install-kod.sh
       printStr yellow "kod_script updated"
       printf $GREEN_LINE
@@ -122,7 +122,7 @@ up_kod_script() {
 up_wp_script() {
     if [ ! -f /usr/bin/install-wordpress.sh ]; then
       printStr yellow "update wordpress_script"
-      wget https://gitee.com/teasiu/histb/raw/main/package_files/bin_scripts/install-wordpress.sh -O /usr/bin/install-wordpress.sh
+      wget https://raw.hisi.ga/teasiu/histb/main/package_files/bin_scripts/install-wordpress.sh -O /usr/bin/install-wordpress.sh
       chmod +x /usr/bin/install-wordpress.sh
       printStr yellow "wordpress_script updated"
       printf $GREEN_LINE
@@ -132,7 +132,7 @@ up_wp_script() {
 up_photoalbum_script() {
     if [ ! -f /usr/bin/install-photoalbum.sh ]; then
       printStr yellow "update photoalbum_script"
-      wget https://gitee.com/teasiu/histb/raw/main/package_files/bin_scripts/install-photoalbum.sh -O /usr/bin/install-photoalbum.sh
+      wget https://raw.hisi.ga/teasiu/histb/main/package_files/bin_scripts/install-photoalbum.sh -O /usr/bin/install-photoalbum.sh
       chmod +x /usr/bin/install-photoalbum.sh
       printStr yellow "photoalbum_script updated"
       printf $GREEN_LINE
