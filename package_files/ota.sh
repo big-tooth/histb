@@ -39,17 +39,19 @@ dl_get() {
 
 ota_script() {
     if [ -f /usr/bin/nasupdate ]; then
-rm /usr/bin/nasupdate
+      rm /usr/bin/nasupdate
+    fi
 cat <<EOF > /usr/bin/nasupdate
 #!/bin/bash
     
 bash <(curl https://ecoo.top/ota.sh)
 
 EOF
-	chmod +x /usr/bin/nasupdate
-	printStr yellow "ota_script: upgraded"
-	printf $GREEN_LINE
-    fi
+
+chmod +x /usr/bin/nasupdate
+printStr yellow "ota_script: upgraded"
+printf $GREEN_LINE
+
 }
 
 up_typecho_theme() {
