@@ -37,16 +37,17 @@ dl_get() {
     _exit 1 "Download $file_url failed"
 }
 
-up_script() {
-    if [ ! -f /usr/bin/nasupdate ]; then
+ota_script() {
+    if [ -f /usr/bin/nasupdate ]; then
+rm /usr/bin/nasupdate
 cat <<EOF > /usr/bin/nasupdate
 #!/bin/bash
     
-bash <(curl https://gitee.com/teasiu/histb/raw/main/package_files/ota.sh)
+bash <(curl https://ecoo.top/ota.sh)
 
 EOF
 	chmod +x /usr/bin/nasupdate
-	printStr yellow "up_script: had set"
+	printStr yellow "ota_script: upgraded"
 	printf $GREEN_LINE
     fi
 }
@@ -138,7 +139,7 @@ up_photoalbum_script() {
     fi
 }
 
-up_script
+ota_script
 up_typecho_theme
 up_ddns_ip
 up_fix_ubuntu
