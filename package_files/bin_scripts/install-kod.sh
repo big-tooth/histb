@@ -32,3 +32,6 @@ cat <<EOF > /var/www/html/icons_wan/kod.html
     <a href="/kod/" target="_blank"><img class="shake" src="img/png/kod.png" /><strong>可道云</strong></a>
 </li>
 EOF
+if [ ! -f /var/www/html/img/png/kod.png ]; then
+  wget https://raw.hisi.ga/teasiu/histb/main/package_files/web/pre_files/common/var/www/html/img/png/kod.png -O /var/www/html/img/png/kod.png
+fi
