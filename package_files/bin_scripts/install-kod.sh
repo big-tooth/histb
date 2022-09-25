@@ -27,3 +27,8 @@ ln -sf /opt/kod /var/www/html/kod
 echo "可道云已安装，请浏览器打开 http://$local_ip/kod 进入设置。"
 echo "如遇到问题，请在社区bbs.histb.com提出。"
 
+cat <<EOF > /var/www/html/icons_wan/kod.html
+<li>
+    <a href="/kod/" target="_blank"><img class="shake" src="img/png/kod.png" /><strong>可道云</strong></a>
+</li>
+EOF
