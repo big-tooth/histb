@@ -38,7 +38,7 @@ install_dockerimagep(){
 local_ip=$(ifconfig eth0 | grep '\<inet\>'| grep -v '127.0.0.1' | awk '{ print $2}' | awk 'NR==1')
 if [ ! -d /opt/Portainer/portainer_public ] ;then
   mkdir -p /opt/Portainer
-  wget --no-check-certificate https://dl.ecoo.top:2096/update/soft_init/portainer-ce-cn-${portainer_version}.zip -P /opt/Portainer && echo "Successed download chinese language package"
+  wget --no-check-certificate https://dl.ecoo.top/update/soft_init/portainer-ce-cn-${portainer_version}.zip -P /opt/Portainer && echo "Successed download chinese language package"
   if [ ! -f /opt/Portainer/portainer-ce-cn-${portainer_version}.zip ]; then 
     echo "donwload chinese language package failed" && exit
   fi

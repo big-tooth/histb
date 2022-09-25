@@ -1,7 +1,7 @@
 #!/bin/bash
 # scripts for ota update
 
-dl_mirrors=("https://dl.ecoo.top:2096" "https://www.ecoo.top")
+dl_mirrors=("https://dl.ecoo.top" "https://www.ecoo.top")
 
 readonly COLOUR_RESET='\e[0m'
 declare -A COLORS
