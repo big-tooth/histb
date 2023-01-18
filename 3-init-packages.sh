@@ -88,9 +88,19 @@ EOF
 	rm -f ${ROOTFS}/root/.bash_history
 }
 
+apt_install_jdk8() {
+	cat << EOF | chroot ${ROOTFS}
+apt-get update
+apt-get upgrade -y
+apt-get install openjdk-8-jdk -y
+EOF
+}
+
 main() {
 	apt_update
 	install_all_package $*
+	apt_clear
+	apt_install_jdk8
 	apt_clear
 }
 
