@@ -22,8 +22,8 @@ jobs:
     - name: Mirror the Github organization repos to Gitee.
       uses: Yikun/hub-mirror-action@master
       with:
-        src: github/teasiu
-        dst: gitee/teasiu
-        dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
-        dst_token: ${{ secrets.GITEE_TOKEN }}
+        src: github/big-tooth
+        dst: gitee/drophair
+        dst_key: ${{ secrets.GITEE_PRIVATE_SSH_KEY }}
+        dst_token: ${{ secrets.GITEE_PRIVATE_TOKEN }}
         static_list: "histb"

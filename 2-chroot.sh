@@ -54,6 +54,7 @@ echo "net.core.rmem_default=4195328" >> /etc/sysctl.d/10-udp-mem.conf
 echo "net.ipv4.udp_mem=4195328 4195328 4195328" >> /etc/sysctl.d/10-udp-mem.conf
 echo "net.ipv4.udp_rmem_min=4195328" >> /etc/sysctl.d/10-udp-mem.conf
 echo "net.ipv4.udp_wmem_min=4195328" >> /etc/sysctl.d/10-udp-mem.conf
+
 crontab -l > /tmp/crontab.$$
 echo '0 */3 * * * ramfree' >> /tmp/crontab.$$
 crontab /tmp/crontab.$$
@@ -75,6 +76,14 @@ cat <<EOT >> rootfs/etc/network/interfaces.d/eth0
 auto eth0
 iface eth0 inet dhcp
 EOT
+
+
+# 配置IPv6
+echo "net.ipv6.conf.all.disable_ipv6 = 0“ >> /etc/sysctl.conf
+echo "net.ipv6.conf.default.disable_ipv6 = 0“ >> /etc/sysctl.conf
+echo "net.ipv6.conf.lo.disable_ipv6 = 0“ >> /etc/sysctl.conf
+## 加入论坛命令 https://bbs.histb.com/d/139-ipv6/8
+echo "iface eth0 inet6 dhcp" >> /etc/network/interfaces.d/eth0
 
 # resize2fs
 source package_files/system-resize2fs.sh
