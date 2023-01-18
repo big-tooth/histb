@@ -1,29 +1,43 @@
-###########################################################
-#   Description: Compile push2gitee by GitHub Actions      #
-#   Based on:    										  #
-#   Author: Teasiu                                        #
-###########################################################
+# ###########################################################
+# #   Description: Compile push2gitee by GitHub Actions      #
+# #   Based on:    										  #
+# #   Author: Teasiu                                        #
+# ###########################################################
 
-name: autopush2gitee
+# name: autopush2gitee
 
+# on:
+#   repository_dispatch:
+#   workflow_dispatch:
+
+#   push:
+#     branches: 
+#       - main
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Mirror the Github organization repos to Gitee.
+#       uses: Yikun/hub-mirror-action@master
+#       with:
+#         src: github/big-tooth
+#         dst: gitee/drophair
+#         dst_key: ${{ secrets.GITEE_PRIVATE_SSH_KEY }}
+#         dst_token: ${{ secrets.GITEE_PRIVATE_TOKEN }}
+#         static_list: "histb"
+
+name: big-tooth/histb
 on:
-  repository_dispatch:
-  workflow_dispatch:
-
   push:
-    branches: 
-      - main
-
+    branches:
+      - master
+  workflow_dispatch:
 jobs:
   build:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-18.04
     steps:
-    - name: Mirror the Github organization repos to Gitee.
-      uses: Yikun/hub-mirror-action@master
-      with:
-        src: github/big-tooth
-        dst: gitee/drophair
-        dst_key: ${{ secrets.GITEE_PRIVATE_SSH_KEY }}
-        dst_token: ${{ secrets.GITEE_PRIVATE_TOKEN }}
-        static_list: "histb"
+      - uses: actions/checkout@v2
+      - name: Setup Debug Session
+        uses: csexton/debugger-action@master
