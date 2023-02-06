@@ -79,9 +79,9 @@ EOT
 
 
 # 配置IPv6
-echo "net.ipv6.conf.all.disable_ipv6 = 0“ >> /etc/sysctl.conf
-echo "net.ipv6.conf.default.disable_ipv6 = 0“ >> /etc/sysctl.conf
-echo "net.ipv6.conf.lo.disable_ipv6 = 0“ >> /etc/sysctl.conf
+echo "net.ipv6.conf.all.disable_ipv6 = 0" >> /etc/sysctl.conf
+echo "net.ipv6.conf.default.disable_ipv6 = 0" >> /etc/sysctl.conf
+echo "net.ipv6.conf.lo.disable_ipv6 = 0" >> /etc/sysctl.conf
 ## 加入论坛命令 https://bbs.histb.com/d/139-ipv6/8
 echo "iface eth0 inet6 dhcp" >> /etc/network/interfaces.d/eth0
 
